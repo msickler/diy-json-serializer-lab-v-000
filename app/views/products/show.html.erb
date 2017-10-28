@@ -3,3 +3,18 @@
 <h1 class="productDescription"><%= @product.description %></h1>
 <p class="productInventory"><%= @product.inventory %></p>
 <p class="productPrice"><%= @product.price %></p>
+
+<script type="text/javascript" charset="utf-8">
+  $(function () {
+    $(".js-next").on("click", function() {
+      var nextId = parseInt($(".js-next").attr("data-id")) + 1
+      $.getJSON("/products/" + nextId + "/product_data", function(data) {
+        $(".name").text(data["name"])
+        $(".productDescription").text(data["description"])
+        $(".productInventory").text(data["inventory"])
+        $(".productPrice").text(data["price"])
+        $(".js-next").attr("data-id", data["id"])
+      })
+    })
+  })
+</script>
